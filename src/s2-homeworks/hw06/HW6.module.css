@@ -1,5 +1,15 @@
 .buttonsContainer {
+    display: flex;
+    gap: 0 24px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    font-family: inherit;
+
 }
 
 .editableSpanContainer {
+    padding: 32px 0 24px 0;
+
 }
