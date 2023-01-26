@@ -38,6 +38,7 @@ const HW8 = () => {
             homeWorkReducer(initialPeople, {type: 'sort', payload: 'up'})
         ) // в алфавитном порядке a.name > b.name
         setCurrentSort('up')
+
     }
 
     const sortDown = () => {
@@ -84,7 +85,7 @@ const HW8 = () => {
 
                     <table id={'hw8-users'} className={s.users}>
                         <thead className={s.thead}>
-                        <tr>
+                        <tr className={s.my}>
                             <td className={s.nameCol}>Name</td>
                             <td className={s.ageCol}>Age</td>
                         </tr>
