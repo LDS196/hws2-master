@@ -4,7 +4,6 @@ export const Loader = () => {
     return(
         <div className={s.loader}>
             <img src={loader} alt=""/>
-
             </div>
     )
 }
