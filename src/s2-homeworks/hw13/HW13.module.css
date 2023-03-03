@@ -2,21 +2,42 @@
 }
 
 .responseContainer {
+    padding-top: 95px;
+    padding-bottom: 95px;
+    display: flex;
+    align-items: center;
+    gap: 0 90px;
+    justify-content:space-between;
 }
 
 .imageContainer {
+    flex:1 1 50%
 }
 
 .image {
+    height: auto;
+    width: 100%;
+    /* еще больше контроля с max-width */
+    max-width: 450px;
+
 }
 
 .textContainer{
+    flex:1 1 50%
 }
 
 .code {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 37px;
 }
 
 .text {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
 }
 .info {
 }

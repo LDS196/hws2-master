@@ -8,6 +8,7 @@ import error400 from './images/400.svg'
 import error500 from './images/500.svg'
 import errorUnknown from './images/error.svg'
 
+
 /*
 * 1 - дописать функцию send
 * 2 - дизэйблить кнопки пока идёт запрос
@@ -36,12 +37,30 @@ const HW13 = () => {
             .then((res) => {
                 setCode('Код 200!')
                 setImage(success200)
-                // дописать
+                setText('...всё ок)\nкод 200 - обычно означает что скорее всего всё ок)')
+                setInfo('')
+
 
             })
             .catch((e) => {
-                // дописать
-
+                if(e.response.status===500){
+                    setCode('Ошибка 500!')
+                    setImage(error500)
+                    setText('эмитация ошибки на сервере\n ошибка 500 - обычно означает что что-то сломалось на сервере, например база данных)')
+                    setInfo('')
+                }
+                if(e.response.status===400){
+                    setCode('Ошибка 400!')
+                    setImage(error400)
+                    setText('Ты не отправил success в body вообще!\n ошибка 400 - обычно означает что скорее всего фронт отправил что-то не то на бэк!')
+                    setInfo('')
+                }
+                if(e.response.status===0){
+                    setCode('Error!')
+                    setImage(errorUnknown)
+                    setText('Network Error\n + AxiosError')
+                    setInfo('')
+                }
             })
     }
 
@@ -55,7 +74,7 @@ const HW13 = () => {
                         id={'hw13-send-true'}
                         onClick={send(true)}
                         xType={'secondary'}
-                        // дописать
+                       disabled={!!info}
 
                     >
                         Send true
@@ -64,7 +83,7 @@ const HW13 = () => {
                         id={'hw13-send-false'}
                         onClick={send(false)}
                         xType={'secondary'}
-                        // дописать
+                        disabled={!!info}
 
                     >
                         Send false
@@ -73,7 +92,7 @@ const HW13 = () => {
                         id={'hw13-send-undefined'}
                         onClick={send(undefined)}
                         xType={'secondary'}
-                        // дописать
+                        disabled={!!info}
 
                     >
                         Send undefined
@@ -82,7 +101,7 @@ const HW13 = () => {
                         id={'hw13-send-null'}
                         onClick={send(null)} // имитация запроса на не корректный адрес
                         xType={'secondary'}
-                        // дописать
+                        disabled={!!info}
 
                     >
                         Send null
