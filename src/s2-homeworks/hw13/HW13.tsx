@@ -20,6 +20,7 @@ const HW13 = () => {
     const [text, setText] = useState('')
     const [info, setInfo] = useState('')
     const [image, setImage] = useState('')
+    const [disable, setDisable] = useState(false)
 
     const send = (x?: boolean | null | undefined) => () => {
         const url =
@@ -31,35 +32,45 @@ const HW13 = () => {
         setImage('')
         setText('')
         setInfo('...loading')
+        setDisable(true)
 
         axios
             .post(url, {success: x})
             .then((res) => {
                 setCode('Код 200!')
                 setImage(success200)
-                setText('...всё ок)код 200 - обычно означает что скорее всего всё ок)')
-                setInfo('')
-
-
+                setText('...всё ок)')
+                setInfo('код 200 - обычно означает что скорее всего всё ок)')
+                setDisable(false)
+                // код 200 - обычно означает что скорее всего всё ок)
             })
             .catch((e) => {
                 if(e.response.status===500){
                     setCode('Ошибка 500!')
                     setImage(error500)
-                    setText('эмитация ошибки на сервере ошибка 500 - обычно означает что что-то сломалось на сервере, например база данных)')
-                    setInfo('')
+                    setText('эмитация ошибки на сервере')
+                    setInfo('ошибка 500 - обычно означает что что-то сломалось на сервере, например база данных)')
+                    // ошибка 500 - обычно означает что что-то сломалось на сервере, например база данных)
+                    setDisable(false)
+
                 }
                 if(e.response.status===400){
                     setCode('Ошибка 400!')
                     setImage(error400)
-                    setText('Ты не отправил success в body вообще!ошибка 400 - обычно означает что скорее всего фронт отправил что-то не то на бэк!')
-                    setInfo('')
+                    setText('Ты не отправил success в body вообще!')
+                    // ошибка 400 - обычно означает что скорее всего фронт отправил что-то не то на бэк!
+                    setInfo('ошибка 400 - обычно означает что скорее всего фронт отправил что-то не то на бэк!')
+                    setDisable(false)
+
                 }
                 if(e.response.status===0){
                     setCode('Error!')
                     setImage(errorUnknown)
-                    setText('Network Error AxiosError')
-                    setInfo('')
+                    setText('Network Error')
+                    // AxiosError
+                    setInfo('AxiosError')
+                    setDisable(false)
+
                 }
             })
     }
@@ -74,7 +85,7 @@ const HW13 = () => {
                         id={'hw13-send-true'}
                         onClick={send(true)}
                         xType={'secondary'}
-                       disabled={!!info}
+                       disabled={disable}
 
                     >
                         Send true
@@ -83,7 +94,7 @@ const HW13 = () => {
                         id={'hw13-send-false'}
                         onClick={send(false)}
                         xType={'secondary'}
-                        disabled={!!info}
+                        disabled={disable}
 
                     >
                         Send false
@@ -92,7 +103,7 @@ const HW13 = () => {
                         id={'hw13-send-undefined'}
                         onClick={send(undefined)}
                         xType={'secondary'}
-                        disabled={!!info}
+                        disabled={disable}
 
                     >
                         Send undefined
@@ -101,7 +112,7 @@ const HW13 = () => {
                         id={'hw13-send-null'}
                         onClick={send(null)} // имитация запроса на не корректный адрес
                         xType={'secondary'}
-                        disabled={!!info}
+                        disabled={disable}
 
                     >
                         Send null
